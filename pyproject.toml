@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "unittesting"
+version = "0.1.0"
+description = ""
+authors = ["H. Felix Wittmann <hfwittmann@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+langchain = "^0.3.0"
+pytest = "^8.3.3"
+pytest-mock = "^3.14.0"
+pytest-cov = "^5.0.0"
+langchain-openai = "^0.2.0"
+python-dotenv = "^1.0.1"
+python-box = "^7.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
