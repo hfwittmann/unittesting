@@ -10,7 +10,7 @@ from mycode import tellJoke
 
 class MockStrOutputParser:
     def __call__(self, input_data):
-        return input_data.__rshift__.return_value[0].text
+        return input_data.content
 
 
 def test_tellJoke(mocker):
@@ -19,8 +19,7 @@ def test_tellJoke(mocker):
     mocker.patch("mycode.AzureChatOpenAI", return_value=mock_azure_chat_openai)
 
     # Configure the mock instance
-    mock_instance = mock_azure_chat_openai.return_value
-    mock_instance.__rshift__.return_value = [Box({"text": "Mocked joke"})]
+    mock_azure_chat_openai.return_value = Box({"content": "Mocked joke"})
 
     # Mock the StrOutputParser class
     mock_str_output_parser = MockStrOutputParser()
@@ -34,8 +33,6 @@ def test_tellJoke(mocker):
     # Assert the result
     assert joke == "Mocked joke"
 
-    print(mock_azure_chat_openai.call_args)
-
     # Optional: Assert that the AzureChatOpenAI class was called
     mock_azure_chat_openai.assert_called_once()
 
@@ -46,7 +43,7 @@ def test_tellJoke(mocker):
                 HumanMessage(
                     content="tell me a joke about bears",
                     additional_kwargs={},
-                    response_metadata={},
+                    example=False,
                 )
             ]
         )
